@@ -1,0 +1,12 @@
+DEMO VERSION:
+
+[Added]
+* 12 New Mechanics, closed out 4.
+* Custom Menu, with hard work poured into it.
+* Custom Options Menu
+* Ability to select Mechanic Aggressiveness
+* Discord Server
+[Changed]
+* Improved Input System, improving responsiveness
+* Graphics Quality
+* Improvements towards Saving Settings

@@ -1,0 +1,20 @@
+CREDITS - FRIDAY NIGHT FUNKIN' ULTIMATE MECHANICS MOD
+
+[Director / Programmer / Graphics]
+* EyeDaleHim
+
+[Logo Design]
+* SuperBonk06
+
+[Other Credits]
+
+* "Tricky Mod" created by Tricky Mod Team, Tricky is a part of the Newgrounds' Madness Combat series, "Madness Combat" belongs to Krinkels.
+* "Termination Mod" created by Hazard24 and CountNightshade
+* "Friday Night Funkin' created by ninjamuffin99, PhantomArcade, KawaiSprite, evilsk8er"
+
+RESOURCES
+
+* The "Friday Night Funkin - Platinum Engine" is a fork of [ninjamuffin99/Funkin](https://github.com/ninjamuffin99/Funkin)
+* Various codes taken from "Kade Engine", "Psych Engine", credits to KadeDev and Shadow Mario.
+* Sound Designs were altered in Audacity, original sound design from "freesound.org".
+* TeknoAXE - Royalty Free Music (https://www.youtube.com/c/teknoaxe/featured)
