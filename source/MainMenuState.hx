@@ -682,108 +682,12 @@ class MainMenuState extends MusicBeatState
 		add(scoreText);
 		add(diffText);
 
-		FlxMouseEventManager.add(backBtn, function(spr:Alphabet)
-		{
-			if (!isReady && selectedMenu == 'freeplay' && !inOptionsState)
-			{
-				isReady = true;
-				mouseAction = false;
-				FlxG.sound.play(Paths.sound('cancelMenu'), 0.6);
-
-				readyTime = 2.6;
-
-				new FlxTimer().start(0.04, function(tmr:FlxTimer)
-				{
-					spr.visible = !spr.visible;
-				}, 60);
-
-				calculateMulti();
-
-				transitionOut(function()
-				{
-					var black:FlxSprite = new FlxSprite(-80, -80).makeGraphic(Std.int(FlxG.width * 1.2), Std.int(FlxG.height * 1.2), FlxColor.BLACK);
-					black.scrollFactor.set();
-					add(black);
-
-					rightBG.visible = true;
-					moreButton.x = rightBG.x - moreButton.width;
-
-					for (i in 0...mechanicBtn.members.length)
-					{
-						mechanicBtn.members[i].visible = true;
-					}
-
-					curSelected = 0;
-					changeSong();
-
-					for (i in 0...mechanicItems.members.length)
-					{
-						mechanicItems.members[i].x += 1000;
-					}
-
-					for (i in 0...mechanicTxts.members.length)
-					{
-						mechanicTxts.members[i].x += 1000;
-					}
-
-					for (i in 0...2)
-					{
-						if (mechanicArrows[i] == null)
-							continue;
-						for (j in 0...mechanicArrows[i].members.length)
-						{
-							mechanicArrows[i].members[j].x += 1000;
-						}
-					}
-
-					new FlxTimer().start(0.6, function(tmr:FlxTimer)
-					{
-						remove(black);
-						black.destroy();
-						transitionIn();
-						gridBG.scrollFactor.set(0.1, 0.1);
-						selectedMenu = 'select';
-
-						for (songs in displaySongs)
-						{
-							songs.alpha = 0;
-						}
-						for (icon in iconArray)
-						{
-							icon.alpha = 0;
-						}
-
-						scoreBG.alpha = 0;
-						scoreText.alpha = 0;
-						diffText.alpha = 0;
-						multiplyTxt.alpha = 1;
-
-						backBtn.alpha = 0;
-						readyBtn.alpha = 0.6;
-						isReady = false;
-						mouseAction = true;
-					});
-				});
-			}
-		}, null, function(spr:Alphabet)
-		{
-			if (spr.alpha != 0 && !inOptionsState)
-				spr.alpha = 1;
-		}, function(spr:Alphabet)
-		{
-			if (spr.alpha != 0 && !inOptionsState)
-			{
-				spr.alpha = 0.6;
-				if (isReady)
-					spr.alpha = 1;
-			}
-		});
-
-		FlxMouseEventManager.add(readyBtn, function(spr:Alphabet)
+		var readyClick:Alphabet->Void = function(spr:Alphabet)
 		{
 			if (!isReady && selectedMenu == 'select' && !inOptionsState)
 			{
 				isReady = true;
+				FlxMouseEventManager.remove(readyBtn);
 				mouseAction = false;
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.6);
 				new FlxTimer().start(0.04, function(tmr:FlxTimer)
@@ -895,6 +799,107 @@ class MainMenuState extends MusicBeatState
 					}
 				});
 			}
+		};
+
+		var readyDown:Alphabet->Void = function(spr:Alphabet)
+		{
+			if (spr.alpha != 0 && !inOptionsState)
+				spr.alpha = 1;
+		}
+		var readyOff:Alphabet->Void = function(spr:Alphabet)
+		{
+			if (spr.alpha != 0 && !inOptionsState)
+			{
+				spr.alpha = 0.6;
+				if (isReady)
+					spr.alpha = 1;
+			}
+		}
+
+		FlxMouseEventManager.add(backBtn, function(spr:Alphabet)
+		{
+			if (!isReady && selectedMenu == 'freeplay' && !inOptionsState)
+			{
+				isReady = true;
+				mouseAction = false;
+				FlxMouseEventManager.add(readyBtn, readyClick, null, readyDown, readyOff);
+				FlxG.sound.play(Paths.sound('cancelMenu'), 0.6);
+
+				readyTime = 2.6;
+
+				new FlxTimer().start(0.04, function(tmr:FlxTimer)
+				{
+					spr.visible = !spr.visible;
+				}, 60);
+
+				calculateMulti();
+
+				transitionOut(function()
+				{
+					var black:FlxSprite = new FlxSprite(-80, -80).makeGraphic(Std.int(FlxG.width * 1.2), Std.int(FlxG.height * 1.2), FlxColor.BLACK);
+					black.scrollFactor.set();
+					add(black);
+
+					rightBG.visible = true;
+					moreButton.x = rightBG.x - moreButton.width;
+
+					for (i in 0...mechanicBtn.members.length)
+					{
+						mechanicBtn.members[i].visible = true;
+					}
+
+					curSelected = 0;
+					changeSong();
+
+					for (i in 0...mechanicItems.members.length)
+					{
+						mechanicItems.members[i].x += 1000;
+					}
+
+					for (i in 0...mechanicTxts.members.length)
+					{
+						mechanicTxts.members[i].x += 1000;
+					}
+
+					for (i in 0...2)
+					{
+						if (mechanicArrows[i] == null)
+							continue;
+						for (j in 0...mechanicArrows[i].members.length)
+						{
+							mechanicArrows[i].members[j].x += 1000;
+						}
+					}
+
+					new FlxTimer().start(0.6, function(tmr:FlxTimer)
+					{
+						remove(black);
+						black.destroy();
+						transitionIn();
+						gridBG.scrollFactor.set(0.1, 0.1);
+						selectedMenu = 'select';
+
+						for (songs in displaySongs)
+						{
+							songs.alpha = 0;
+						}
+						for (icon in iconArray)
+						{
+							icon.alpha = 0;
+						}
+
+						scoreBG.alpha = 0;
+						scoreText.alpha = 0;
+						diffText.alpha = 0;
+						multiplyTxt.alpha = 1;
+
+						backBtn.alpha = 0;
+						readyBtn.alpha = 0.6;
+						isReady = false;
+						mouseAction = true;
+					});
+				});
+			}
 		}, null, function(spr:Alphabet)
 		{
 			if (spr.alpha != 0 && !inOptionsState)
@@ -908,6 +913,8 @@ class MainMenuState extends MusicBeatState
 					spr.alpha = 1;
 			}
 		});
+
+		FlxMouseEventManager.add(readyBtn, readyClick, null, readyDown, readyOff);
 
 		/*
 			for (i in 0...optionShit.length)
