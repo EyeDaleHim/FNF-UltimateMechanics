@@ -1000,6 +1000,16 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
+		if (MainMenuState.mechanics[5].points != 0)
+		{
+			var tempSprite = new FlxSprite(-1, -1);
+			tempSprite.frames = Paths.getSparrowAtlas('gremlin/HP GREMLIN', null, false);
+			tempSprite.animation.addByPrefix('everything', 'HP Gremlin ANIMATION', 24);
+			tempSprite.animation.play('everything');
+			tempSprite.animation.stop();
+			tempSprite.destroy();
+		}
+
 		if (isStoryMode || debugCutscene)
 		{
 			switch (curSong.toLowerCase())
@@ -3160,7 +3170,9 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
+		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001
+			&& boyfriend.animation.curAnim.name.startsWith('sing')
+			&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 		{
 			boyfriend.playAnim('idle');
 		}
