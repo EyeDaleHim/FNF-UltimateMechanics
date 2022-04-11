@@ -1432,6 +1432,9 @@ class PlayState extends MusicBeatState
 		var playerCounter:Int = 0;
 
 		var daBeats:Int = 0; // Not exactly representative of 'daBeats' lol, just how much it has looped
+
+		var weightedChance:Float = 0;
+		var doubleChanceWeight:Float = 0;
 		for (section in noteData)
 		{
 			var coolSection:Int = Std.int(section.lengthInSteps / 4);
@@ -1461,24 +1464,32 @@ class PlayState extends MusicBeatState
 			{
 				if (MainMenuState.mechanics[10].points != 0)
 				{
-					if (FlxG.random.bool(15 + (1.25 * MainMenuState.mechanics[10].points)))
+					if (FlxG.random.bool(15 + (1.25 * MainMenuState.mechanics[10].points) + weightedChance))
 					{
 						sawBlades.push([coolSection, false]);
+						weightedChance = 0;
 					}
 					else
 					{
 						sawBlades.push(null);
+						weightedChance += 0.15 + (0.05 * MainMenuState.mechanics[10].points);
 					}
 				}
 
 				if (MainMenuState.mechanics[11].points != 0)
 				{
-					if (FlxG.random.bool(7.5 + (0.75 * MainMenuState.mechanics[11].points)))
+					if (FlxG.random.bool(7.5 + (0.75 * MainMenuState.mechanics[11].points) + doubleChanceWeight))
 					{
 						if (sawBlades.length != 0)
+						{
 							sawBlades[coolSection] = [coolSection, true];
+							doubleChanceWeight = 0;
+						}
 						else
+						{
 							sawBlades.push([coolSection, false]);
+							doubleChanceWeight += 0.1 + (0.025 * MainMenuState.mechanics[10].points);
+						}
 					}
 				}
 			}
@@ -3151,7 +3162,7 @@ class PlayState extends MusicBeatState
 
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 		{
-			boyfriend.dance();
+			boyfriend.playAnim('idle');
 		}
 
 		if (!FlxG.save.data.botplay)
