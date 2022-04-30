@@ -294,6 +294,7 @@ class MainMenuState extends MusicBeatState
 
 		multiplyTxt = new FlxText(FlxG.width * 0.85, FlxG.height * 0.65);
 		multiplyTxt.scrollFactor.set();
+		multiplyTxt.setFormat(Paths.font('funkin', 'otf'), 56, FlxColor.WHITE, CENTER);
 		multiplyTxt.text = '1X';
 
 		rightBG = new FlxSprite(FlxG.width - FlxG.width * (1 - 0.75), 0);
