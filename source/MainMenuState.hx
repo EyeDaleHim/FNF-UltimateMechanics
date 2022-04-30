@@ -294,8 +294,6 @@ class MainMenuState extends MusicBeatState
 
 		multiplyTxt = new FlxText(FlxG.width * 0.85, FlxG.height * 0.65);
 		multiplyTxt.scrollFactor.set();
-		multiplyTxt.setFormat(Paths.font('funkin', 'otf'), 56, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
-		multiplyTxt.borderSize = 2;
 		multiplyTxt.text = '1X';
 
 		rightBG = new FlxSprite(FlxG.width - FlxG.width * (1 - 0.75), 0);
@@ -363,7 +361,7 @@ class MainMenuState extends MusicBeatState
 		add(mechanicBtn);
 
 		descriptionTxt = new FlxText(FlxG.width * 0.15, FlxG.height * 0.85, 0, "");
-		descriptionTxt.setFormat(Paths.font('funkin', 'otf'), 24, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
+		descriptionTxt.setFormat(Paths.font('funkin', 'otf'), 24, FlxColor.WHITE, CENTER);
 		descriptionTxt.scrollFactor.set();
 		descriptionTxt.updateHitbox();
 		descriptionTxt.antialiasing = true;
@@ -457,7 +455,7 @@ class MainMenuState extends MusicBeatState
 			mechanicTxt.y = mechanicPort.getGraphicMidpoint().y;
 			mechanicTxt.y += 110;
 			mechanicTxt.scrollFactor.set(0, 0.3);
-			mechanicTxt.setFormat(Paths.font('funkin', 'otf'), 48, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
+			mechanicTxt.setFormat(Paths.font('funkin', 'otf'), 48, FlxColor.WHITE, CENTER);
 			mechanicTxt.borderSize = 2;
 			mechanicTxt.antialiasing = true;
 			mechanicTxt.height = Std.int(mechanicTxt.height * 1.1);
